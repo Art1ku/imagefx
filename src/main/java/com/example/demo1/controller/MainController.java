@@ -27,16 +27,16 @@ public class MainController {
         this.loadingLabel = loadingLabel;
     }
 
-    // Метод для загрузки изображения
+
     public void loadImage() {
-        BufferedImage bufferedImage = FileUtils.loadImageFromFile();  // Используем BufferedImage
+        BufferedImage bufferedImage = FileUtils.loadImageFromFile();
         if (bufferedImage != null) {
-            originalImage = FileUtils.convertToFXImage(bufferedImage);  // Преобразуем в FX Image
+            originalImage = FileUtils.convertToFXImage(bufferedImage);
             originalView.setImage(originalImage);
         }
     }
 
-    // Метод для применения фильтра
+
     public void applyFilter() {
         if (originalImage == null) return;
 
@@ -63,11 +63,11 @@ public class MainController {
         new Thread(task).start();
     }
 
-    // Метод для сохранения изображения
+
     public void saveImage() {
         if (processedImage != null) {
-            BufferedImage bufferedImage = FileUtils.convertToBufferedImage(processedImage);  // Преобразуем в BufferedImage
-            FileUtils.saveImageToFile(bufferedImage);  // Сохраняем через FileUtils
+            BufferedImage bufferedImage = FileUtils.convertToBufferedImage(processedImage);
+            FileUtils.saveImageToFile(bufferedImage);
         }
     }
 }

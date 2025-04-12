@@ -15,7 +15,7 @@ import javafx.scene.image.PixelWriter;
 
 public class FileUtils {
 
-    // Метод для загрузки изображения с компьютера (BufferedImage)
+
     public static BufferedImage loadImageFromFile() {
         FileChooser chooser = new FileChooser();
         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.bmp"));
@@ -23,7 +23,6 @@ public class FileUtils {
 
         if (file != null) {
             try {
-                // Загружаем изображение как BufferedImage
                 return ImageIO.read(file);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -32,7 +31,6 @@ public class FileUtils {
         return null;
     }
 
-    // Метод для сохранения изображения в файл (BufferedImage)
     public static void saveImageToFile(BufferedImage image) {
         FileChooser chooser = new FileChooser();
         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG", "*.png"));
@@ -40,7 +38,6 @@ public class FileUtils {
 
         if (file != null) {
             try {
-                // Сохраняем изображение в формате PNG
                 ImageIO.write(image, "PNG", file);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -48,9 +45,7 @@ public class FileUtils {
         }
     }
 
-    // Преобразование BufferedImage в Image для отображения в ImageView
     public static Image convertToFXImage(BufferedImage bufferedImage) {
-        // Преобразуем BufferedImage в Image
         WritableImage fxImage = new WritableImage(bufferedImage.getWidth(), bufferedImage.getHeight());
         PixelWriter pixelWriter = fxImage.getPixelWriter();
 
@@ -65,9 +60,7 @@ public class FileUtils {
         return fxImage;
     }
 
-    // Преобразование Image в BufferedImage
     public static BufferedImage convertToBufferedImage(Image fxImage) {
-        // Преобразуем Image (fxImage) в BufferedImage
         BufferedImage bufferedImage = new BufferedImage((int) fxImage.getWidth(), (int) fxImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
         javafx.scene.image.PixelReader pixelReader = fxImage.getPixelReader();
         for (int x = 0; x < fxImage.getWidth(); x++) {
