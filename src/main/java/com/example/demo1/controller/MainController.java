@@ -8,6 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
+import java.awt.image.BufferedImage;
+
 
 public class MainController {
     private final ImageView originalView;
@@ -25,13 +27,16 @@ public class MainController {
         this.loadingLabel = loadingLabel;
     }
 
+    // Метод для загрузки изображения
     public void loadImage() {
-        originalImage = FileUtils.loadImage();
-        if (originalImage != null) {
+        BufferedImage bufferedImage = FileUtils.loadImageFromFile();  // Используем BufferedImage
+        if (bufferedImage != null) {
+            originalImage = FileUtils.convertToFXImage(bufferedImage);  // Преобразуем в FX Image
             originalView.setImage(originalImage);
         }
     }
 
+    // Метод для применения фильтра
     public void applyFilter() {
         if (originalImage == null) return;
 
@@ -58,9 +63,11 @@ public class MainController {
         new Thread(task).start();
     }
 
+    // Метод для сохранения изображения
     public void saveImage() {
         if (processedImage != null) {
-            FileUtils.saveImage(processedImage);
+            BufferedImage bufferedImage = FileUtils.convertToBufferedImage(processedImage);  // Преобразуем в BufferedImage
+            FileUtils.saveImageToFile(bufferedImage);  // Сохраняем через FileUtils
         }
     }
 }
